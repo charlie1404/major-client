@@ -1,0 +1,2 @@
+export const LOGIN_WATCHER = 'LOGIN_WATCHER';
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';

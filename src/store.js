@@ -3,12 +3,10 @@ import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { createLogger } from 'redux-logger';
-import createSagaMiddleware from 'redux-saga';
+import thunk from 'redux-thunk';
 
-import rootSaga from './root-saga';
-import rootReducer from './root-reducer';
+import reducers from './reducers';
 
-const sagaMiddleware = createSagaMiddleware();
 const history = createBrowserHistory();
 const historyMiddlewares = routerMiddleware(history);
 // const localStorageMiddleware = store => next => (action) => {
@@ -31,16 +29,16 @@ const historyMiddlewares = routerMiddleware(history);
 
 const middlewares = [
   historyMiddlewares,
-  sagaMiddleware,
+  thunk,
   // localStorageMiddleware,
 ];
-if (process.env.NODE_ENV === 'production') {
-  middlewares.push(createLogger());
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   middlewares.push(createLogger());
+// }
 
 const store = createStore(
   combineReducers({
-    rootReducer,
+    ...reducers,
     router: connectRouter(history),
   }),
   undefined,
@@ -48,4 +46,3 @@ const store = createStore(
 );
 
 export { store, history };
-sagaMiddleware.run(rootSaga);

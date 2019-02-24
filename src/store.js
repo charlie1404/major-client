@@ -12,7 +12,8 @@ const history = createBrowserHistory();
 const historyMiddlewares = routerMiddleware(history);
 // const localStorageMiddleware = createLocalStorageMiddleware();
 
-const devMiddlewares = [createLogger()];
+// const devMiddlewares = [createLogger()];
+const devMiddlewares = [];
 const middlewares = [
   historyMiddlewares,
   thunk,

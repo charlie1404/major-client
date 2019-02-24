@@ -19,7 +19,8 @@ import LayersIcon from '@material-ui/icons/Layers';
 
 import { logout } from 'actions/users';
 
-import MainAppBar from '../app-bar';
+import MainAppBar from 'components/app-bar';
+
 import SimpleLineChart from './SimpleLineChart';
 import SimpleTable from './SimpleTable';
 

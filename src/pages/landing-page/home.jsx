@@ -15,7 +15,7 @@ import { Helmet } from 'react-helmet';
 import tiers from 'constants/tiers-data';
 import { Link } from 'react-router-dom';
 
-import styles from './styles';
+import styles from './home.styles';
 
 function Pricing(props) {
   const { classes } = props;

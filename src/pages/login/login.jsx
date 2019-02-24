@@ -17,11 +17,17 @@ import { Helmet } from 'react-helmet';
 
 import { login } from 'actions/users';
 
-import styles from './styles';
+import styles from './login.styles';
 
 class SignIn extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      email: 'test@charlieweb.tk',
+      password: 'test@123',
+    };
+
     if (document.cookie) {
       const cookies = document.cookie.split('; ')
         .reduce((acc, curr) => {
@@ -34,11 +40,6 @@ class SignIn extends Component {
       }
     }
   }
-
-  state = {
-    email: 'admin@charlieweb.tk',
-    password: '123456789',
-  };
 
   onChange = (event) => {
     const { name, value } = event.target;

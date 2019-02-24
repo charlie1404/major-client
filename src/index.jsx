@@ -7,13 +7,16 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch } from 'react-router-dom';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
+
 import { store, history } from './store';
 import NotFound from './components/not-found';
-import Login from './components/login';
-import LandingPage from './components/landing-page';
-import App from './components/app';
+import LoadingComponent from './components/loading-component';
 import PrivateRoute from './components/private-route';
 import theme from './theme';
+
+const App = React.lazy(() => import('./pages/app/app'));
+const Login = React.lazy(() => import('./pages/login/login'));
+const LandingPage = React.lazy(() => import('./pages/landing-page/home'));
 
 ReactDOM.render(
   (
@@ -21,9 +24,9 @@ ReactDOM.render(
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <Switch>
-            <PrivateRoute exact path="/app" component={App} />
-            <Route exact path="/" component={LandingPage} />
-            <Route exact path="/login" component={Login} />
+            <PrivateRoute exact path="/app" component={LoadingComponent(App)} />
+            <Route exact path="/" component={LoadingComponent(LandingPage)} />
+            <Route exact path="/login" component={LoadingComponent(Login)} />
             <Route component={NotFound} />
           </Switch>
         </ConnectedRouter>

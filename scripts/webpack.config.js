@@ -100,6 +100,7 @@ module.exports = (webpackEnv) => {
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
     bail: isEnvProduction,
+    // eslint-disable-next-line no-nested-ternary
     devtool: isEnvProduction ? (shouldUseSourceMap ? 'source-map' : false) : (isEnvDevelopment && 'cheap-module-source-map'),
     entry: [
       // Include an alternative client for WebpackDevServer. A client's job is to
@@ -123,12 +124,12 @@ module.exports = (webpackEnv) => {
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
       filename: isEnvProduction
-        ? 'static/js/[name].[chunkhash:8].js'
+        ? 'static/js/[chunkhash:8].js'
         : isEnvDevelopment && 'static/js/bundle.js',
       // There are also additional JS chunk files if you use code splitting.
       chunkFilename: isEnvProduction
-        ? 'static/js/[name].[chunkhash:8].chunk.js'
-        : isEnvDevelopment && 'static/js/[name].chunk.js',
+        ? 'static/js/[chunkhash:8].chunk.js'
+        : isEnvDevelopment && 'static/js/[id].chunk.js',
       // We inferred the "public path" (such as / or /my-project) from homepage.
       // We use "/" in development.
       publicPath,

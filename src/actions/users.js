@@ -1,3 +1,4 @@
+import { push } from 'connected-react-router';
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
@@ -5,7 +6,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_REQUEST,
 } from '../constants/actions';
-import { LOGIN_ROUTE } from '../constants/endpoints';
+import { LOGIN_ROUTE, LOGOUT_ROUTE } from '../constants/endpoints';
 import apiHandler from './helpers/api-handler';
 
 export const login = (email, password) => (dispatch) => {
@@ -14,11 +15,20 @@ export const login = (email, password) => (dispatch) => {
   return apiHandler(LOGIN_ROUTE.route, LOGIN_ROUTE.method, { email, password })
     .then((data) => {
       dispatch({ type: LOGIN_SUCCESS });
+      dispatch(push({ pathname: '/app' }));
     })
     .catch(() => {
-      setTimeout(() => {
-        dispatch({ type: LOGIN_FAILED });
-      }, 200);
+      dispatch({ type: LOGIN_FAILED });
+    });
+};
+
+export const logout = () => (dispatch) => {
+  return apiHandler(LOGOUT_ROUTE.route, LOGOUT_ROUTE.method)
+    .then(() => {
+      dispatch(push({ pathname: '/login' }));
+    })
+    .catch(() => {
+      dispatch(push({ pathname: '/login' }));
     });
 };
 

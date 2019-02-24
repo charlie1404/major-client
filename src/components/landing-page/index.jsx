@@ -11,6 +11,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
+import { Helmet } from 'react-helmet';
 import tiers from 'constants/tiers-data';
 import { Link } from 'react-router-dom';
 
@@ -20,6 +21,9 @@ function Pricing(props) {
   const { classes } = props;
   return (
     <React.Fragment>
+      <Helmet>
+        <title>College Notes Gallery</title>
+      </Helmet>
       <AppBar position="static" color="default" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>

@@ -13,12 +13,28 @@ import InputLabel from '@material-ui/core/InputLabel';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { Helmet } from 'react-helmet';
 
 import { login } from 'actions/users';
 
 import styles from './styles';
 
 class SignIn extends Component {
+  constructor(props) {
+    super(props);
+    if (document.cookie) {
+      const cookies = document.cookie.split('; ')
+        .reduce((acc, curr) => {
+          const [key, val] = curr.split('=');
+          acc[key] = val;
+          return acc;
+        }, {});
+      if (cookies.keepalive) {
+        return props.history.push({ pathname: '/app', state: { from: props.location } });
+      }
+    }
+  }
+
   state = {
     email: 'admin@charlieweb.tk',
     password: '123456789',
@@ -41,6 +57,9 @@ class SignIn extends Component {
 
     return (
       <main className={classes.main}>
+        <Helmet>
+          <title>Login</title>
+        </Helmet>
         <Paper className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
